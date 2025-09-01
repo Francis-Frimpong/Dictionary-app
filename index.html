@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dictionary App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Top Nav -->
+      <header class="top-bar">
+        <h1 class="logo">Dictionary</h1>
+        <div class="font-select">
+          <label for="font-style" class="visually-hidden">Font</label>
+          <select id="font-style">
+            <option value="sans-serif">Sans Serif</option>
+            <option value="serif">Serif</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- Search Bar -->
+      <div class="search-box">
+        <input type="text" placeholder="Search for any word..." />
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <!-- Results -->
+      <section class="results">
+        <div class="word-row">
+          <h2 class="word">keyboard</h2>
+          <button class="audio-btn" aria-label="Play pronunciation">🔊</button>
+        </div>
+        <p class="phonetic">/ˈkiːbɔːd/</p>
+
+        <div class="definition-block">
+          <h3>Meaning</h3>
+          <ul>
+            <li>The set of keys used to operate a computer or typewriter.</li>
+            <li>A device with keys for playing musical notes.</li>
+          </ul>
+        </div>
+
+        <div class="source">
+          <p>Source: <a href="#">https://dictionaryapi.dev</a></p>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
