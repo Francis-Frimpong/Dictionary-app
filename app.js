@@ -31,6 +31,14 @@ class DictionaryApp {
 const word = document.querySelector(".word");
 const fontSelect = document.getElementById("font-style");
 
+const searchField = document.querySelector("input");
+const searchBtn = document.querySelector(".search-btn");
+
 const dictionary = new DictionaryApp();
-dictionary.searchWord("software");
+
+searchBtn.addEventListener("click", () => {
+  dictionary.searchWord(searchField.value);
+  searchField.value = "";
+  // console.log("search", searchField.value);
+});
 fontSelect.addEventListener("input", () => dictionary.changeFont());
