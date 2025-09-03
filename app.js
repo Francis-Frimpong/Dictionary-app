@@ -19,7 +19,69 @@ class DictionaryApp {
     );
 
     searchData.getApi().then((data) => {
-      console.log(data);
+      for (const answer of data) {
+        console.log(answer);
+        const resultsContainer = document.querySelector(".results-container");
+        resultsContainer.innerHTML = "";
+
+        // Create section
+        const section = document.createElement("section");
+        section.classList.add("results");
+
+        // Word row
+        const wordRow = document.createElement("div");
+        wordRow.classList.add("word-row");
+
+        const wordEl = document.createElement("h2");
+        wordEl.classList.add("word");
+        wordEl.textContent = answer.word;
+
+        const audioBtn = document.createElement("button");
+        audioBtn.classList.add("audio-btn");
+        audioBtn.setAttribute("aria-label", "Play pronunciation");
+        audioBtn.textContent = "🔊";
+
+        wordRow.appendChild(wordEl);
+        wordRow.appendChild(audioBtn);
+
+        // Phonetic
+        const phonetic = document.createElement("p");
+        phonetic.classList.add("phonetic");
+        phonetic.textContent = answer.phonetic;
+
+        // Definition block
+        const defBlock = document.createElement("div");
+        defBlock.classList.add("definition-block");
+
+        const defTitle = document.createElement("h3");
+        defTitle.textContent = "Meaning";
+
+        const ul = document.createElement("ul");
+        answer.meanings.forEach((meaning) => {
+          meaning.definitions.forEach((definition) => {
+            const li = document.createElement("li");
+            li.textContent = definition.definition;
+            ul.appendChild(li);
+          });
+        });
+
+        defBlock.appendChild(defTitle);
+        defBlock.appendChild(ul);
+
+        // Source
+        const source = document.createElement("div");
+        source.classList.add("source");
+        source.innerHTML = `<p>Source: <a href="${answer.sourceUrls}" target="_blank">${answer.sourceUrls}</a></p>`;
+
+        // Assemble section
+        section.appendChild(wordRow);
+        section.appendChild(phonetic);
+        section.appendChild(defBlock);
+        section.appendChild(source);
+
+        // Append to container
+        resultsContainer.appendChild(section);
+      }
     });
   }
 
