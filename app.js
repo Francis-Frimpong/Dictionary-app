@@ -91,12 +91,18 @@ class DictionaryApp {
 
         // Append to container
         resultsContainer.appendChild(section);
+
+        fontSelect.addEventListener("input", () =>
+          this.changeFont([wordEl, ul, source, defTitle])
+        );
       }
     });
   }
 
-  changeFont() {
-    word.style.fontFamily = fontSelect.value;
+  changeFont(args) {
+    for (const targetFont of args) {
+      targetFont.style.fontFamily = fontSelect.value;
+    }
   }
 }
 
@@ -111,12 +117,4 @@ const dictionary = new DictionaryApp();
 searchBtn.addEventListener("click", () => {
   dictionary.searchWord(searchField.value);
   searchField.value = "";
-  // console.log("search", searchField.value);
 });
-fontSelect.addEventListener("input", () => dictionary.changeFont());
-
-// const audio = new Audio(
-//   "https://api.dictionaryapi.dev/media/pronunciations/en/audio-us.mp3"
-// );
-
-// audio.play();
