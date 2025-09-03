@@ -1,5 +1,5 @@
 class DictionaryApi {
-  constructor(resource, word) {
+  constructor(resource) {
     this.resource = resource;
     this.word = word;
   }
@@ -13,7 +13,15 @@ class DictionaryApi {
 class DictionaryApp {
   constructor() {}
 
-  searchWord() {}
+  searchWord(word) {
+    const searchData = new DictionaryApi(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    );
+
+    searchData.getApi().then((data) => {
+      console.log(data);
+    });
+  }
 
   changeFont() {
     word.style.fontFamily = fontSelect.value;
@@ -24,4 +32,5 @@ const word = document.querySelector(".word");
 const fontSelect = document.getElementById("font-style");
 
 const dictionary = new DictionaryApp();
+dictionary.searchWord("software");
 fontSelect.addEventListener("input", () => dictionary.changeFont());
