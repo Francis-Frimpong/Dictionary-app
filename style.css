@@ -155,3 +155,7 @@ body {
 .source a:hover {
   text-decoration: underline;
 }
+
+.search-txt {
+  text-align: center;
+}

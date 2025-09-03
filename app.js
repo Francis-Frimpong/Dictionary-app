@@ -20,7 +20,6 @@ class DictionaryApp {
 
     searchData.getApi().then((data) => {
       for (const answer of data) {
-        console.log(answer);
         const resultsContainer = document.querySelector(".results-container");
         resultsContainer.innerHTML = "";
 
