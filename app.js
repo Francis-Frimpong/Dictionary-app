@@ -40,6 +40,17 @@ class DictionaryApp {
         audioBtn.classList.add("audio-btn");
         audioBtn.setAttribute("aria-label", "Play pronunciation");
         audioBtn.textContent = "🔊";
+        audioBtn.addEventListener("click", () => {
+          // Find the first valid audio file
+          const validSound = answer.phonetics.find((sound) => sound.audio);
+
+          if (validSound) {
+            const audio = new Audio(validSound.audio);
+            audio.play().catch((err) => console.error("Playback error:", err));
+          } else {
+            console.log("No audio available for this word.");
+          }
+        });
 
         wordRow.appendChild(wordEl);
         wordRow.appendChild(audioBtn);
@@ -104,3 +115,9 @@ searchBtn.addEventListener("click", () => {
   // console.log("search", searchField.value);
 });
 fontSelect.addEventListener("input", () => dictionary.changeFont());
+
+// const audio = new Audio(
+//   "https://api.dictionaryapi.dev/media/pronunciations/en/audio-us.mp3"
+// );
+
+// audio.play();
