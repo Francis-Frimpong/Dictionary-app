@@ -1,7 +1,6 @@
 class DictionaryApi {
   constructor(resource) {
     this.resource = resource;
-    this.word = word;
   }
 
   async getApi() {
@@ -11,7 +10,13 @@ class DictionaryApi {
 }
 
 class DictionaryApp {
-  constructor() {}
+  constructor() {
+    this.fontToChange = [];
+    this.fontSelect = document.getElementById("font-style");
+
+    this.searchField = document.querySelector("input");
+    this.searchBtn = document.querySelector(".search-btn");
+  }
 
   searchWord(word) {
     const searchData = new DictionaryApi(
@@ -92,29 +97,26 @@ class DictionaryApp {
         // Append to container
         resultsContainer.appendChild(section);
 
-        fontSelect.addEventListener("input", () =>
-          this.changeFont([wordEl, ul, source, defTitle])
-        );
+        this.fontToChange = [wordEl, ul, source, defTitle];
       }
     });
   }
 
-  changeFont(args) {
-    for (const targetFont of args) {
-      targetFont.style.fontFamily = fontSelect.value;
+  changeFont() {
+    for (const targetFont of this.fontToChange) {
+      targetFont.style.fontFamily = this.fontSelect.value;
     }
+  }
+
+  addEventListeners() {
+    this.fontSelect.addEventListener("click", () => this.changeFont());
+
+    this.searchBtn.addEventListener("click", () => {
+      this.searchWord(this.searchField.value);
+      this.searchField.value = "";
+    });
   }
 }
 
-const word = document.querySelector(".word");
-const fontSelect = document.getElementById("font-style");
-
-const searchField = document.querySelector("input");
-const searchBtn = document.querySelector(".search-btn");
-
 const dictionary = new DictionaryApp();
-
-searchBtn.addEventListener("click", () => {
-  dictionary.searchWord(searchField.value);
-  searchField.value = "";
-});
+dictionary.addEventListeners();
